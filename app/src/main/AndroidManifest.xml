@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.touter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".CatalogActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EventsActivity"
+            android:parentActivityName=".CatalogActivity"
+            android:label="@string/activity_events" />
+        <activity
+            android:name=".DetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:parentActivityName=".CatalogActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CatalogActivity" />
+        </activity>
+        <activity
+            android:name=".ArchiveActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/activity_archive" />
+
+        <provider
+            android:name=".data.TicketProvider"
+            android:authorities="com.example.android.touter"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

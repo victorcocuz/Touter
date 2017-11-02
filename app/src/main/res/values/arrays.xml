@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="detail_spinner_tickets">
+        <item>@string/detail_spinner_tickets_unknown</item>
+        <item>@string/detail_spinner_tickets_1</item>
+        <item>@string/detail_spinner_tickets_2</item>
+        <item>@string/detail_spinner_tickets_3</item>
+        <item>@string/detail_spinner_tickets_4</item>
+    </string-array>
+
+    <string-array name="detail_spinner_section">
+        <item>@string/detail_spinner_section_unknown</item>
+        <item>@string/detail_spinner_section_ga</item>
+        <item>@string/detail_spinner_section_lower_tier</item>
+        <item>@string/detail_spinner_section_middle_tier</item>
+        <item>@string/detail_spinner_section_upper_tier</item>
+    </string-array>
+</resources>

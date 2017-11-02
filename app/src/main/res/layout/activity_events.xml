@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorAccent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.touter.EventsActivity">
+
+    <ProgressBar
+        android:id="@+id/events_progress_bar"
+        android:layout_width="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:progressTint="@color/colorPrimaryDark"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/events_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_regular"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

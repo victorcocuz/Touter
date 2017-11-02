@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    tools:context="com.example.android.touter.DetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            //OverView
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/detail_card_overview"
+                style="@style/DetailCardView"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/detail_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@null"
+                        android:scaleType="centerCrop" />
+
+                    <LinearLayout
+                        style="@style/DetailCardLinearLayout"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/detail_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/text_small"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_title"
+                            tools:text="@string/ticket_title" />
+
+                        <TextView
+                            android:id="@+id/detail_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlackTint40"
+                            tools:text="@string/ticket_info" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            //Ticket Selection
+
+            <TextView
+                style="@style/DetailCardTitle"
+                android:text="@string/detail_ticket_selection" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/detail_card_ticket_selection"
+                style="@style/DetailCardView"
+                android:layout_height="@dimen/container_medium_large">
+
+                <LinearLayout
+                    style="@style/DetailCardLinearLayout"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_spinner_tickets" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/detail_spinner_ticket"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/container_medium"
+                            android:layout_weight="1"
+                            android:padding="@dimen/margin_regular"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_spinner_section" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/detail_spinner_section"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/container_medium"
+                            android:layout_weight="1"
+                            android:spinnerMode="dropdown" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            //Order Summary
+
+            <TextView
+                style="@style/DetailCardTitle"
+                android:text="@string/detail_order_summary" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/detail_card_order_summery"
+                style="@style/DetailCardView"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    style="@style/DetailCardLinearLayout"
+                    android:orientation="vertical">
+
+                    //Summary Title
+
+                    <LinearLayout
+                        android:id="@+id/detail_summary_title"
+                        style="@style/DetailSummaryLinearLayout"
+                        android:layout_marginBottom="@dimen/margin_small">
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="left"
+                            android:text="@string/detail_order_section" />
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_area" />
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_seat" />
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="right"
+                            android:text="@string/detail_order_value" />
+                    </LinearLayout>
+
+                    //Summary Ticket 1
+
+                    <LinearLayout
+                        android:id="@+id/detail_summary_ticket_1"
+                        style="@style/DetailSummaryLinearLayout">
+
+                        <TextView
+                            android:id="@+id/detail_summary_section_1View"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="left" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_area_1" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_seat_1" />
+
+                        <TextView
+                            android:id="@+id/detail_summary_value_1"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="right" />
+                    </LinearLayout>
+
+                    //Summary ticket 2
+
+                    <LinearLayout
+                        android:id="@+id/detail_summary_ticket_2"
+                        style="@style/DetailSummaryLinearLayout">
+
+                        <TextView
+                            android:id="@+id/detail_summary_section_2"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="left" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_area_1" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_seat_2" />
+
+                        <TextView
+                            android:id="@+id/detail_summary_value_2"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="right" />
+                    </LinearLayout>
+
+
+                    //Summary ticket 3
+
+                    <LinearLayout
+                        android:id="@+id/detail_summary_ticket_3"
+                        style="@style/DetailSummaryLinearLayout">
+
+                        <TextView
+                            android:id="@+id/detail_summary_section_3"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="left" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_area_1" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_seat_3" />
+
+                        <TextView
+                            android:id="@+id/detail_summary_value_3"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="right" />
+                    </LinearLayout>
+
+
+                    //Summary ticket 4
+
+                    <LinearLayout
+                        android:id="@+id/detail_summary_ticket_4"
+                        style="@style/DetailSummaryLinearLayout">
+
+                        <TextView
+                            android:id="@+id/detail_summary_section_4"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="left" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_area_1" />
+
+                        <TextView
+                            style="@style/DetailSummaryText"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_seat_4" />
+
+                        <TextView
+                            android:id="@+id/detail_summary_value_4"
+                            style="@style/DetailSummaryText"
+                            android:layout_width="@dimen/container_large"
+                            android:gravity="right" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/DetailSummaryLinearLayout"
+                        android:layout_marginTop="@dimen/margin_regular">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/detail_order_taxes"
+                            android:textColor="@color/colorBlackTint40"
+                            android:textSize="@dimen/text_caption" />
+
+                        <TextView
+                            android:id="@+id/detail_order_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:textColor="@color/colorSecondaryDark"
+                            android:textSize="@dimen/text_header"
+                            tools:text="@string/detail_order_total" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            //Reselling Information
+
+            <TextView
+                style="@style/DetailCardTitle"
+                android:text="@string/detail_reselling_information" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/detail_card_reselling_information"
+                style="@style/DetailCardView"
+                android:layout_height="@dimen/container_medium_large">
+
+                <LinearLayout
+                    style="@style/DetailCardLinearLayout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/DetailTitleText"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="@string/detail_reselling_for" />
+
+                    <EditText
+                        android:id="@+id/detail_price_reselling"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:backgroundTint="@color/colorSecondaryAccent"
+                        android:cursorVisible="false"
+                        android:hint="@string/detail_reselling_price"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:textColorHint="@color/colorSecondaryAccent"
+                        android:textSize="@dimen/text_header" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            //Contact Supplier
+
+            <TextView
+                style="@style/DetailCardTitle"
+                android:text="@string/detail_contact_supplier" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/detail_card_contact_supplier"
+                style="@style/DetailCardView"
+                android:layout_height="@dimen/container_large">
+
+                <LinearLayout
+                    style="@style/DetailCardLinearLayout"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/margin_regular"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:text="@string/detail_contact_supplier_website" />
+
+                        <TextView
+                            android:id="@+id/detail_contact_website"
+                            style="@style/DetailWebsiteText"
+                            android:gravity="left"
+                            android:text="@string/detail_contact_website" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/DetailTitleText"
+                            android:gravity="left"
+                            android:layout_weight="2"
+                            android:text="@string/detail_contact_supplier_email" />
+
+                        <TextView
+                            android:id="@+id/detail_contact_email"
+                            style="@style/DetailWebsiteText"
+                            android:gravity="left"
+                            android:text="@string/detail_contact_email" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/detail_total_profit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/container_medium"
+        android:background="@color/colorSecondaryAccent"
+        android:gravity="center"
+        android:textSize="@dimen/text_title"
+        android:text="@string/detail_total_profit"
+        android:textColor="@color/colorSecondaryDark" />
+
+</LinearLayout>

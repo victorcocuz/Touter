@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Touter</string>
+
+    //Activities
+    <string name="activity_main">Catalog</string>
+    <string name="activity_detail_insert">Order Tickets</string>
+    <string name="activity_detail_edit">Edit Tickets</string>
+    <string name="activity_archive">Archive</string>
+    <string name="activity_events">Events</string>
+
+    //Menus
+    <string name="action_insert_dummy_ticket">Insert Dummy Ticket</string>
+    <string name="action_delete_all_entries">Delete All Entries</string>
+    <string name="action_save_ticket">Save Ticket</string>
+    <string name="action_delete_ticket">Delete Ticket</string>
+
+    //Query Data
+    <string name="ticket_title">Event</string>
+    <string name="ticket_image">Image Url</string>
+    <string name="ticket_date">Date</string>
+    <string name="ticket_time">Time</string>
+    <string name="ticket_price_min">Min</string>
+    <string name="ticket_price_max">Max</string>
+    <string name="ticket_venue">Venue</string>
+    <string name="ticket_city">City</string>
+    <string name="ticket_info">General Info</string>
+
+    //Detail Activity
+    <string name="detail_ticket_selection">Ticket Selection</string>
+    <string name="detail_spinner_tickets">Tickets</string>
+    <string name="detail_spinner_tickets_unknown">Select Tickets</string>
+    <string name="detail_spinner_tickets_1">1</string>
+    <string name="detail_spinner_tickets_2">2</string>
+    <string name="detail_spinner_tickets_3">3</string>
+    <string name="detail_spinner_tickets_4">4</string>
+    <string name="detail_spinner_section">Section</string>
+    <string name="detail_spinner_section_unknown">Select Area</string>
+    <string name="detail_spinner_section_ga">GA</string>
+    <string name="detail_spinner_section_lower_tier">Lower Tier</string>
+    <string name="detail_spinner_section_middle_tier">Middle Tier</string>
+    <string name="detail_spinner_section_upper_tier">Upper Tier</string>
+
+    <string name="detail_order_summary">Order Summary</string>
+    <string name="detail_order_section">Section</string>
+    <string name="detail_order_area">Area</string>
+    <string name="detail_order_seat">Seat</string>
+    <string name="detail_order_value">Value</string>
+    <string name="detail_order_taxes">Including booking, handling &amp; VAT</string>
+    <string name="detail_order_total">Total</string>
+
+    <string name="detail_order_area_1">L24</string>
+    <string name="detail_order_seat_1">372</string>
+    <string name="detail_order_seat_2">373</string>
+    <string name="detail_order_seat_3">374</string>
+    <string name="detail_order_seat_4">375</string>
+
+    <string name="detail_reselling_information">Reselling Information</string>
+    <string name="detail_reselling_for">Reselling for</string>
+    <string name="detail_reselling_price">Price per ticket</string>
+
+    <string name="detail_contact_supplier">Contact Supplier</string>
+    <string name="detail_contact_supplier_website">Website</string>
+    <string name="detail_contact_supplier_email">E-mail</string>
+    <string name="detail_contact_website">TicketMaster</string>
+    <string name="detial_contact_website_url">http://www.ticketmaster.co.uk</string>
+    <string name="detail_contact_email">Customer Support</string>
+    <string name="detail_contact_email_url">customer_support@ticketmaster.co.uk</string>
+
+    <string name="detail_total_profit">Total Profit</string>
+
+    //Catalog Activity
+    <string name="catalog_buy_for">Buy For</string>
+    <string name="catalog_sell_for">Sell For</string>
+    <string name="catalog_inventory">Tickets in your inventory</string>
+
+    //Events Activity
+    <string name="events_tickets_left">Only 29 tickets left!</string>
+
+    //Messages
+    <string name="empty_view_title">It\'s a bit lonely here…</string>
+    <string name="empty_view_subtitle">Let\'s add some tickets</string>
+    <string name="editor_insert_ticket_successful">Ticket saved</string>
+    <string name="editor_insert_ticket_failed">Error with saving ticket</string>
+    <string name="editor_update_ticket_successful">Ticket updated</string>
+    <string name="editor_update_ticket_failed">Error with updating ticket</string>
+    <string name="editor_delete_all_tickets">All tickets were deleted from database</string>
+    <string name="editor_delete_ticket_successful">Ticket deleted</string>
+    <string name="editor_delete_ticket_failed">Error with deleting ticket</string>
+    <string name="catalog_negative_inventory">You cannot have a negative inventory</string>
+    <string name="catalog_large_inventory">You cannot buy more than 4 tickets at a time</string>
+    <string name="dialog_unsaved_changes_msg">Discard your changes and quit editing?</string>
+    <string name="dialog_discard">Discard</string>
+    <string name="dialog_keep_editing">Keep Editing</string>
+    <string name="delete_dialog_msg">Delete this ticket?</string>
+    <string name="dialog_delete">Delete</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_incomplete_order">Please complete all fields before ordering tickets</string>
+
+    //Others
+    <string name="pound">£</string>
+    <string name="unknown">Unknown</string>
+</resources>

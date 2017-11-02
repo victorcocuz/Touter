@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/catalog_main_view"
+    android:background="@color/colorAccent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.touter.CatalogActivity">
+
+    <LinearLayout
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="@dimen/margin_large"
+            android:text="@string/empty_view_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_header"
+            android:text="@string/empty_view_subtitle" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/catalog_list_view"
+        android:layout_width="match_parent"
+        android:dividerHeight="@dimen/margin_regular"
+        android:divider="@android:color/transparent"
+        android:layout_margin="@dimen/margin_regular"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/catalog_fab"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_large"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

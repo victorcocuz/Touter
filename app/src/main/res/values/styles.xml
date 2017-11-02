@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    //Detail Activity
+    <style name="DetailCardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/margin_regular</item>
+        <item name="android:layout_margin">@dimen/margin_regular</item>
+    </style>
+
+    <style name="DetailCardLinearLayout">
+        <item name="android:padding">@dimen/margin_regular</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="DetailSummaryLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="DetailCardTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_regular</item>
+        <item name="android:layout_marginRight">@dimen/margin_regular</item>
+        <item name="android:layout_marginTop">@dimen/margin_regular</item>
+        <item name="android:textSize">@dimen/text_header</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="DetailTitleText">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <style name="DetailWebsiteText">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorLink</item>
+        <item name="android:textSize">@dimen/text_header</item>
+    </style>
+
+    <style name="DetailSummaryText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+
+
+
+</resources>
