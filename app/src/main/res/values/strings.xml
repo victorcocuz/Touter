@@ -62,11 +62,14 @@
     <string name="detail_contact_supplier_website">Website</string>
     <string name="detail_contact_supplier_email">E-mail</string>
     <string name="detail_contact_website">TicketMaster</string>
-    <string name="detial_contact_website_url">http://www.ticketmaster.co.uk</string>
+    <string name="detail_contact_website_url">http://www.ticketmaster.co.uk</string>
     <string name="detail_contact_email">Customer Support</string>
     <string name="detail_contact_email_url">customer_support@ticketmaster.co.uk</string>
 
     <string name="detail_total_profit">Total Profit</string>
+
+    <string name="detail_add_ticket">Add Ticket</string>
+    <string name="detail_remove_ticket">Remove Ticket</string>
 
     //Catalog Activity
     <string name="catalog_buy_for">Buy For</string>
@@ -95,6 +98,7 @@
     <string name="dialog_delete">Delete</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_incomplete_order">Please complete all fields before ordering tickets</string>
+    <string name="choose_image">Click to Change Image</string>
 
     //Others
     <string name="pound">£</string>

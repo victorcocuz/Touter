@@ -38,6 +38,11 @@
                 tools:text="@string/ticket_title" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/priceRange"/>
+
+            <TextView
                 android:id="@+id/card_events_info_1"
                 android:textSize="@dimen/text_small"
                 android:textColor="@color/colorBlackTint70"

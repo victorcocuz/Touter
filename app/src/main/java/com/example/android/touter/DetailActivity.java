@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
@@ -41,6 +42,9 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     private static final String LOG_TAG = DetailActivity.class.getSimpleName();
     private static final int EXISTING_TICKET_LOADER = 0;
+    private static final int PICK_IMAGE_REQUEST = 0;
+    private static final int BUY_ONE = 1;
+    private static final int SELL_ONE = -1;
 
     String ticketTitle, ticketDate, ticketTime, ticketCity, ticketVenue;
     byte[] ticketImageArray;
@@ -60,8 +64,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     TextView detailTotalView;
 
     //Bind Ticket Selection
-    @BindView(R.id.detail_spinner_ticket)
-    Spinner detailSpinnerTicketView;
+    @BindView(R.id.detail_catalog_buy)
+    TextView detailCatalogAdd;
+    @BindView(R.id.detail_catalog_sell)
+    TextView detailCatalogRemove;
     @BindView(R.id.detail_spinner_section)
     Spinner detailSpinnerSectionView;
 
@@ -158,6 +164,14 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             getSupportLoaderManager().initLoader(EXISTING_TICKET_LOADER, null, this);
         }
 
+        //Change Image
+        detailImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImageSelector();
+            }
+        });
+
         //Get spinner information
         setupSpinner();
 
@@ -181,16 +195,35 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         });
 
         //Setup onTouchListeners
-        detailSpinnerTicketView.setOnTouchListener(touchListener);
+        detailCatalogAdd.setOnTouchListener(touchListener);
+        detailCatalogRemove.setOnTouchListener(touchListener);
         detailSpinnerSectionView.setOnTouchListener(touchListener);
         detailPriceResaleView.setOnTouchListener(touchListener);
+
+        //Setup Quantity Buttons
+        detailCatalogAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accessInventory(BUY_ONE, ticketQuantity, currentTicketUri);
+            }
+        });
+
+        detailCatalogRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accessInventory(SELL_ONE, ticketQuantity, currentTicketUri);
+            }
+        });
+
+        detailCatalogAdd.setText(getString(R.string.detail_add_ticket));
+        detailCatalogRemove.setText(getString(R.string.detail_remove_ticket));
 
         //Contact supplier
         detailContactWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ACTION_VIEW);
-                intent.setData(Uri.parse(getString(R.string.detial_contact_website_url)));
+                intent.setData(Uri.parse(getString(R.string.detail_contact_website_url)));
                 startActivity(intent);
             }
         });
@@ -208,54 +241,60 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         });
     }
 
+    public void accessInventory(int i, int quantity, Uri currentTicketUri) {
+        int ticketInventory = quantity + i;
+        if (ticketInventory > 4) {
+            Toast.makeText(this, getString(R.string.catalog_large_inventory), Toast.LENGTH_SHORT).show();
+        } else if (ticketInventory < 0) {
+            Toast.makeText(this, getString(R.string.catalog_negative_inventory), Toast.LENGTH_SHORT).show();
+        } else {
+
+            if (ticketInventory == TicketEntry.TICKET_ONE) {
+                ticketQuantity = TicketEntry.TICKET_ONE;
+                detailSummaryTicketView1.setVisibility(View.VISIBLE);
+                detailSummaryTicketView2.setVisibility(View.GONE);
+                detailSummaryTicketView3.setVisibility(View.GONE);
+                detailSummaryTicketView4.setVisibility(View.GONE);
+
+            } else if (ticketInventory == TicketEntry.TICKET_TWO) {
+                ticketQuantity = TicketEntry.TICKET_TWO;
+                detailSummaryTicketView1.setVisibility(View.VISIBLE);
+                detailSummaryTicketView2.setVisibility(View.VISIBLE);
+                detailSummaryTicketView3.setVisibility(View.GONE);
+                detailSummaryTicketView4.setVisibility(View.GONE);
+
+            } else if (ticketInventory == TicketEntry.TICKET_THREE) {
+                ticketQuantity = TicketEntry.TICKET_THREE;
+                detailSummaryTicketView1.setVisibility(View.VISIBLE);
+                detailSummaryTicketView2.setVisibility(View.VISIBLE);
+                detailSummaryTicketView3.setVisibility(View.VISIBLE);
+                detailSummaryTicketView4.setVisibility(View.GONE);
+
+            } else if (ticketInventory == TicketEntry.TICKET_FOUR) {
+                ticketQuantity = TicketEntry.TICKET_FOUR;
+                detailSummaryTicketView1.setVisibility(View.VISIBLE);
+                detailSummaryTicketView2.setVisibility(View.VISIBLE);
+                detailSummaryTicketView3.setVisibility(View.VISIBLE);
+                detailSummaryTicketView4.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    public void openImageSelector() {
+        Intent intent;
+
+        if (Build.VERSION.SDK_INT < 19) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+        } else {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+        }
+
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+    }
+
     private void setupSpinner() {
-
-        //Tickets spinner
-        ArrayAdapter spinnerTicketAdapter = ArrayAdapter.createFromResource(this, R.array.detail_spinner_tickets, android.R.layout.simple_spinner_item);
-        spinnerTicketAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        detailSpinnerTicketView.setAdapter(spinnerTicketAdapter);
-        detailSpinnerTicketView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                if (!TextUtils.isEmpty(selection)) {
-                    if (selection.equals(getString(R.string.detail_spinner_tickets_1))) {
-                        ticketQuantity = TicketEntry.TICKET_ONE;
-                        detailSummaryTicketView1.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView2.setVisibility(View.GONE);
-                        detailSummaryTicketView3.setVisibility(View.GONE);
-                        detailSummaryTicketView4.setVisibility(View.GONE);
-
-                    } else if (selection.equals(getString(R.string.detail_spinner_tickets_2))) {
-                        ticketQuantity = TicketEntry.TICKET_TWO;
-                        detailSummaryTicketView1.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView2.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView3.setVisibility(View.GONE);
-                        detailSummaryTicketView4.setVisibility(View.GONE);
-
-                    } else if (selection.equals(getString(R.string.detail_spinner_tickets_3))) {
-                        ticketQuantity = TicketEntry.TICKET_THREE;
-                        detailSummaryTicketView1.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView2.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView3.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView4.setVisibility(View.GONE);
-
-                    } else if (selection.equals(getString(R.string.detail_spinner_tickets_4))) {
-                        ticketQuantity = TicketEntry.TICKET_FOUR;
-                        detailSummaryTicketView1.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView2.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView3.setVisibility(View.VISIBLE);
-                        detailSummaryTicketView4.setVisibility(View.VISIBLE);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                ticketQuantity = TicketEntry.TICKET_UNKNOWN;
-            }
-        });
 
         //Section spinner
         ArrayAdapter spinnerSectionAdapter = ArrayAdapter.createFromResource(this, R.array.detail_spinner_section, android.R.layout.simple_spinner_item);
@@ -392,8 +431,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save_ticket:
-                if (ticketQuantity == TicketEntry.TICKET_UNKNOWN
-                        || ticketSection == TicketEntry.SECTION_UNKNOWN
+                if (
+                        ticketSection == TicketEntry.SECTION_UNKNOWN
                         || ticketPriceResale == 0) {
                     Toast.makeText(this, getString(R.string.dialog_incomplete_order), Toast.LENGTH_SHORT).show();
                 } else {
@@ -497,24 +536,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             displayTicketProfitValue = getString(R.string.detail_total_profit) + " " + getString(R.string.pound) + cursor.getString(cursor.getColumnIndex(TicketEntry.COLUMN_TICKET_PROFIT));
             detailProfitView.setText(displayTicketProfitValue);
 
-            switch (ticketQuantity) {
-                case TicketEntry.TICKET_ONE:
-                    detailSpinnerTicketView.setSelection(1);
-                    break;
-                case TicketEntry.TICKET_TWO:
-                    detailSpinnerTicketView.setSelection(2);
-                    break;
-                case TicketEntry.TICKET_THREE:
-                    detailSpinnerTicketView.setSelection(3);
-                    break;
-                case TicketEntry.TICKET_FOUR:
-                    detailSpinnerTicketView.setSelection(4);
-                    break;
-                case TicketEntry.TICKET_UNKNOWN:
-                    detailSpinnerTicketView.setSelection(0);
-                    break;
-            }
-
             switch (ticketSection) {
                 case TicketEntry.SECTION_GA:
                     detailSpinnerSectionView.setSelection(1);
@@ -550,7 +571,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     public void onLoaderReset(Loader<Cursor> loader) {
         detailTitleView.setText("");
         detailInfoView.setText("");
-        detailSpinnerTicketView.setSelection(0);
         detailSpinnerSectionView.setSelection(0);
     }
 
