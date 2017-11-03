@@ -21,6 +21,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.android.touter.R.id.priceRange;
+
 /**
  * Created by victo on 10/28/2017.
  */
@@ -125,8 +127,8 @@ public class QueryUtils {
                 JSONObject jsonEvent = jsonEvents.getJSONObject(i);
 
                 String ticketTitle = null;
-                String ticketImageUrl = null;
-                Bitmap ticketImage = null;
+//                String ticketImageUrl = null;
+//                Bitmap ticketImage = null;
                 String ticketVenue = null;
                 String ticketCity = null;
                 int ticketPriceMin = 0;
@@ -140,30 +142,29 @@ public class QueryUtils {
                 }
 
                 //Event image
-                JSONArray jsonImages = jsonEvent.getJSONArray("images");
-                JSONObject jsonImage = jsonImages.getJSONObject(0);
-                if (jsonImage.has("url")) {
-                    ticketImageUrl = jsonImage.getString("url");
-                }
-
-                byte[] ticketImageByte = null;
-
-                try {
-//                    ticketImage = BitmapFactory.decodeStream(getURL(ticketImageUrl).openConnection().getInputStream());
-                    InputStream is = new BufferedInputStream(getURL(ticketImageUrl).openConnection().getInputStream());
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[1024];
-                    int read = 0;
-
-                    while ((read = is.read(buffer, 0, buffer.length)) != -1) {
-                        baos.write(buffer, 0, read);
-                    }
-                    baos.flush();
-                    ticketImageByte = baos.toByteArray();
-
-                } catch (IOException e) {
-                    Log.e(LOG_TAG, "Could not convert url to bitmap ", e);
-                }
+//                JSONArray jsonImages = jsonEvent.getJSONArray("images");
+//                JSONObject jsonImage = jsonImages.getJSONObject(0);
+//                if (jsonImage.has("url")) {
+//                    ticketImageUrl = jsonImage.getString("url");
+//                }
+//
+//                byte[] ticketImageByte = null;
+//
+//                try {
+//                    InputStream is = new BufferedInputStream(getURL(ticketImageUrl).openConnection().getInputStream());
+//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                    byte[] buffer = new byte[1024];
+//                    int read = 0;
+//
+//                    while ((read = is.read(buffer, 0, buffer.length)) != -1) {
+//                        baos.write(buffer, 0, read);
+//                    }
+//                    baos.flush();
+//                    ticketImageByte = baos.toByteArray();
+//
+//                } catch (IOException e) {
+//                    Log.e(LOG_TAG, "Could not convert url to bitmap ", e);
+//                }
 
                 //Event date & time
                 JSONObject jsonDates = jsonEvent.getJSONObject("dates");
@@ -175,12 +176,16 @@ public class QueryUtils {
 
 
                 //Event price range
-                JSONArray priceRanges = jsonEvent.getJSONArray("priceRanges");
-                JSONObject priceRange = priceRanges.getJSONObject(0);
+                if (jsonEvent.has("priceRanges")) {
+                    JSONArray priceRanges = jsonEvent.getJSONArray("priceRanges");
+                    JSONObject priceRange = priceRanges.getJSONObject(0);
 
-                if (priceRange.has("min") && priceRange.has("max")) {
-                    ticketPriceMin = priceRange. getInt("min");
-                    ticketPriceMax = priceRange. getInt("max");
+                    if (priceRange.has("min") && priceRange.has("max")) {
+                        ticketPriceMin = priceRange.getInt("min");
+                        ticketPriceMax = priceRange.getInt("max");
+                    }
+                } else {
+                    continue;
                 }
 
                 //Event location
@@ -197,7 +202,7 @@ public class QueryUtils {
                 }
 
 
-                tickets.add(new Ticket(ticketTitle, ticketImageByte, ticketDate, ticketTime, ticketPriceMin, ticketPriceMax, ticketVenue, ticketCity));
+                tickets.add(new Ticket(ticketTitle, ticketDate, ticketTime, ticketPriceMin, ticketPriceMax, ticketVenue, ticketCity));
             }
 
         } catch (JSONException e) {

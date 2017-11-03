@@ -39,15 +39,15 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     @Override
     public void onBindViewHolder(TicketAdapter.ViewHolder holder, final int position) {
 
-        final byte[] ticketImageByte = tickets.get(position).getTicketImage();
-        Bitmap ticketImage = BitmapFactory.decodeByteArray(ticketImageByte, 0, ticketImageByte.length);
+//        final byte[] ticketImageByte = tickets.get(position).getTicketImage();
+//        Bitmap ticketImage = BitmapFactory.decodeByteArray(ticketImageByte, 0, ticketImageByte.length);
 
         ticketVenue = tickets.get(position).getTicketVenue();
         ticketCity = tickets.get(position).getTicketCity();
         displayTicketInfo = ticketVenue + ", " + ticketCity;
 
         holder.ticketCardTitleView.setText(tickets.get(position).getTicketTitle());
-        holder.ticketCardImageView.setImageBitmap(ticketImage);
+//        holder.ticketCardImageView.setImageBitmap(ticketImage);
         holder.ticketCardDateView.setText(tickets.get(position).getTicketDate());
         holder.ticketCardTimeView.setText(tickets.get(position).getTicketTime());
         holder.ticketCardInfoView.setText(displayTicketInfo);
@@ -58,7 +58,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
                 Intent goToDetailActivity = new Intent(v.getContext(), DetailActivity.class);
                 goToDetailActivity.putExtra(Integer.toString(R.string.ticket_title), tickets.get(position).getTicketTitle());
-                goToDetailActivity.putExtra(Integer.toString(R.string.ticket_image), ticketImageByte);
+//                goToDetailActivity.putExtra(Integer.toString(R.string.ticket_image), ticketImageByte);
                 goToDetailActivity.putExtra(Integer.toString(R.string.ticket_date), tickets.get(position).getTicketDate());
                 goToDetailActivity.putExtra(Integer.toString(R.string.ticket_time), tickets.get(position).getTicketTime());
                 goToDetailActivity.putExtra(Integer.toString(R.string.ticket_price_min), tickets.get(position).getTicketPriceMin());
@@ -88,7 +88,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
 
         @BindView(R.id.card_view_events) CardView ticketCardView;
         @BindView(R.id.card_events_title) TextView ticketCardTitleView;
-        @BindView(R.id.card_events_image_url) ImageView ticketCardImageView;
+//        @BindView(R.id.card_events_image_url) ImageView ticketCardImageView;
         @BindView(R.id.card_events_date) TextView ticketCardDateView;
         @BindView(R.id.card_events_time) TextView ticketCardTimeView;
         @BindView(R.id.card_events_info_1) TextView ticketCardInfoView;

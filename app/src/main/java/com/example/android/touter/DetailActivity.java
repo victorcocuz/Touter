@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -17,6 +18,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ import android.widget.Toast;
 
 import com.example.android.touter.data.TicketContract.TicketEntry;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -46,7 +49,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     private static final String LOG_TAG = DetailActivity.class.getSimpleName();
     private static final int EXISTING_TICKET_LOADER = 0;
-    private static final int PICK_IMAGE_REQUEST = 0;
+    private static final int PICK_IMAGE_REQUEST = 3;
     private static final int BUY_ONE = 1;
     private static final int SELL_ONE = -1;
 
@@ -154,9 +157,18 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             ticketVenue = extras.getString(Integer.toString(R.string.ticket_venue));
 
             //Get image extras from intent and set image
-            ticketImageArray = getIntent().getByteArrayExtra(Integer.toString(R.string.ticket_image));
-            Bitmap ticketImage = BitmapFactory.decodeByteArray(ticketImageArray, 0, ticketImageArray.length);
-            detailImageView.setImageBitmap(ticketImage);
+//            ticketImageArray = getIntent().getByteArrayExtra(Integer.toString(R.string.ticket_image));
+//            Bitmap ticketImage = BitmapFactory.decodeByteArray(ticketImageArray, 0, ticketImageArray.length);
+//            detailImageView.setImageBitmap(ticketImage);
+
+            //Setup Image
+            BitmapDrawable drawable = (BitmapDrawable) detailImageView.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            ticketImageArray = stream.toByteArray();
+
+
 
             detailTitleView.setText(ticketTitle);
             detailInfo = ticketDate + ", " + ticketTime + ", " + ticketVenue + ", " + ticketCity;
@@ -247,11 +259,16 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PICK_IMAGE_REQUEST && requestCode == RESULT_OK) {
+        Log.e(LOG_TAG, "1");
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             Bitmap imageBitmap;
             try {
                 imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                 detailImageView.setImageBitmap(imageBitmap);
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.PNG, 40, stream);
+                ticketImageArray = stream.toByteArray();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -259,6 +276,13 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void openImageSelector(View v) {
+        Intent choosePictureIntent;
+        choosePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(choosePictureIntent, PICK_IMAGE_REQUEST);
     }
 
     public void accessInventory(int i, int quantity, Uri currentTicketUri) {
@@ -298,23 +322,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 detailSummaryTicketView4.setVisibility(View.VISIBLE);
             }
         }
-    }
-
-    public void openImageSelector(View v) {
-        Intent choosePictureIntent;
-        choosePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        startActivityForResult(choosePictureIntent, PICK_IMAGE_REQUEST);
-
-//        if (Build.VERSION.SDK_INT < 19) {
-//            choosePictureIntent = new Intent(Intent.ACTION_GET_CONTENT);
-//        } else {
-//            choosePictureIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-//            choosePictureIntent.addCategory(Intent.CATEGORY_OPENABLE);
-//        }
-//
-//        intent.setType("image/*");
-//        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
     }
 
     private void setupSpinner() {
@@ -389,7 +396,6 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
         if (currentTicketUri == null) {
             values.put(TicketEntry.COLUMN_TICKET_TITLE, ticketTitle);
-            values.put(TicketEntry.COLUMN_TICKET_IMAGE, ticketImageArray);
             values.put(TicketEntry.COLUMN_TICKET_DATE, ticketDate);
             values.put(TicketEntry.COLUMN_TICKET_TIME, ticketTime);
             values.put(TicketEntry.COLUMN_TICKET_PRICE_MIN, ticketPriceMin);
@@ -398,6 +404,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             values.put(TicketEntry.COLUMN_TICKET_VENUE, ticketVenue);
         }
 
+        values.put(TicketEntry.COLUMN_TICKET_IMAGE, ticketImageArray);
         values.put(TicketEntry.COLUMN_TICKET_QUANTITY, ticketQuantity);
         values.put(TicketEntry.COLUMN_TICKET_SECTION, ticketSection);
         values.put(TicketEntry.COLUMN_TICKET_PRICE_BUY, ticketPriceBuy);

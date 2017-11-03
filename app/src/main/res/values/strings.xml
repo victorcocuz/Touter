@@ -6,7 +6,7 @@
     <string name="activity_detail_insert">Order Tickets</string>
     <string name="activity_detail_edit">Edit Tickets</string>
     <string name="activity_archive">Archive</string>
-    <string name="activity_events">Events</string>
+    <string name="activity_events">Select Event</string>
 
     //Menus
     <string name="action_insert_dummy_ticket">Insert Dummy Ticket</string>

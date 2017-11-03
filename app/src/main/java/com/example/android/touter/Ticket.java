@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 public class Ticket {
 
     private String ticketTitle;
-    private byte[] ticketImageByte;
+//    private byte[] ticketImageByte;
     private String ticketDate;
     private String ticketTime;
     private int ticketPriceMin;
@@ -17,9 +17,9 @@ public class Ticket {
     private String ticketVenue;
     private String ticketCity;
 
-    public Ticket(String ticketTitle, byte[] ticketImageByte, String ticketDate, String ticketTime, int ticketPriceMin, int ticketPriceMax, String ticketVenue, String ticketCity) {
+    public Ticket(String ticketTitle, String ticketDate, String ticketTime, int ticketPriceMin, int ticketPriceMax, String ticketVenue, String ticketCity) {
         this.ticketTitle = ticketTitle;
-        this.ticketImageByte = ticketImageByte;
+//        this.ticketImageByte = ticketImageByte;
         this.ticketDate = ticketDate;
         this.ticketTime = ticketTime;
         this.ticketPriceMin = ticketPriceMin;
@@ -28,9 +28,9 @@ public class Ticket {
         this.ticketCity = ticketCity;
     }
 
-    public byte[] getTicketImage() {
-        return ticketImageByte;
-    }
+//    public byte[] getTicketImage() {
+//        return ticketImageByte;
+//    }
 
     public String getTicketTitle() {
         return ticketTitle;
