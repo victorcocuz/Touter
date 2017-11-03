@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
@@ -32,6 +33,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.touter.data.TicketContract.TicketEntry;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -239,6 +243,22 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 startActivity(Intent.createChooser(intent, "Send Email"));
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE_REQUEST && requestCode == RESULT_OK) {
+            Bitmap imageBitmap;
+            try {
+                imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                detailImageView.setImageBitmap(imageBitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void accessInventory(int i, int quantity, Uri currentTicketUri) {
