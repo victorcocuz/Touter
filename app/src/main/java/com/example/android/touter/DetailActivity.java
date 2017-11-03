@@ -172,7 +172,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         detailImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openImageSelector();
+                openImageSelector(v);
             }
         });
 
@@ -300,18 +300,21 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         }
     }
 
-    public void openImageSelector() {
-        Intent intent;
+    public void openImageSelector(View v) {
+        Intent choosePictureIntent;
+        choosePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-        if (Build.VERSION.SDK_INT < 19) {
-            intent = new Intent(Intent.ACTION_GET_CONTENT);
-        } else {
-            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-        }
+        startActivityForResult(choosePictureIntent, PICK_IMAGE_REQUEST);
 
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
+//        if (Build.VERSION.SDK_INT < 19) {
+//            choosePictureIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        } else {
+//            choosePictureIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//            choosePictureIntent.addCategory(Intent.CATEGORY_OPENABLE);
+//        }
+//
+//        intent.setType("image/*");
+//        startActivityForResult(Intent.createChooser(intent, "Select picture"), PICK_IMAGE_REQUEST);
     }
 
     private void setupSpinner() {
